@@ -1,1 +1,73 @@
-<mxfile host="app.diagrams.net" modified="2022-06-19T07:46:25.222Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" version="20.0.1" etag="Z4LF5Xa7Iq2qnbdllCvU" type="github"><diagram id="ejUUTkVv_Ehb3Zgu5rkK">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-06-19T07:46:36.601Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36" etag="ttbzlXNimembo3aDzrN6" version="20.0.1" type="github">
+  <diagram id="ejUUTkVv_Ehb3Zgu5rkK" name="第 1 页">
+    <mxGraphModel dx="1550" dy="835" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ualc1rCMkcrzbtd4liAw-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ualc1rCMkcrzbtd4liAw-2" target="ualc1rCMkcrzbtd4liAw-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-2" value="向goroutine的_panic链表中添加_panic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF99CC;" vertex="1" parent="1">
+          <mxGeometry x="210" y="60" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ualc1rCMkcrzbtd4liAw-4" target="ualc1rCMkcrzbtd4liAw-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-4" value="拿到goroutine的_defer链表头的_defer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B266FF;" vertex="1" parent="1">
+          <mxGeometry x="210" y="220" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ualc1rCMkcrzbtd4liAw-6" target="ualc1rCMkcrzbtd4liAw-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-6" value="将_defer的started置为true&lt;br&gt;将_defer的_panic字段指向之前新添加的_panic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007FFF;" vertex="1" parent="1">
+          <mxGeometry x="210" y="390" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ualc1rCMkcrzbtd4liAw-8" target="ualc1rCMkcrzbtd4liAw-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-8" value="执行reflectcall函数，reflectcall会执行注册的defer函数，如果defer函数中有recover逻辑就会执行gorecover函数，gorecover函数主要就是将_panic的recovered字段置为true，执行完defer函数reflectcall函数就会返回" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#009999;" vertex="1" parent="1">
+          <mxGeometry x="210" y="570" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ualc1rCMkcrzbtd4liAw-10" target="ualc1rCMkcrzbtd4liAw-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-10" value="拿到注册defer函数时保存在_defer中的pc值和栈指针，然后释放掉_defer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#80FF00;" vertex="1" parent="1">
+          <mxGeometry x="210" y="740" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ualc1rCMkcrzbtd4liAw-12" target="ualc1rCMkcrzbtd4liAw-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-12" value="如果_panic的recovered为true那么就会进入恢复panic的逻辑，首先将_panic从goroutine的_panic中移除" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#999900;" vertex="1" parent="1">
+          <mxGeometry x="210" y="910" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-13" value="将之前保存的pc和sp值保存在goroutine的sigcode0和sigcode1中，然后调用mcall执行recovery函数，跳出panic处理流程" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFD966;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1080" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ualc1rCMkcrzbtd4liAw-15" target="ualc1rCMkcrzbtd4liAw-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-15" value="在这个例子中pc和sp的值是注册A2时函数A的pc和sp" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9999;" vertex="1" parent="1">
+          <mxGeometry x="640" y="60" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="ualc1rCMkcrzbtd4liAw-17" target="ualc1rCMkcrzbtd4liAw-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-17" value="因为在注册defer函数时的伪代码如下" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#99004D;" vertex="1" parent="1">
+          <mxGeometry x="640" y="220" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-18" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://oss-liuchengtu.hudunsoft.com/4c/4c22c760c9b03c5795f129aa63d8a7a8.png;" vertex="1" parent="1">
+          <mxGeometry x="560" y="350" width="520" height="244" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="ualc1rCMkcrzbtd4liAw-20" target="ualc1rCMkcrzbtd4liAw-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-20" value="pc就是deferproc函数的返回地址也就是 r &amp;gt; 0那行代码的地址，sp就是函数A的栈指针。deferproc的返回值保存在一个寄存器中，此时r的值就不能是0了，否则会再次执行函数A中的代码。将r的值变为1，那么就会跳到ret处执行deferreturn" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCCFF;" vertex="1" parent="1">
+          <mxGeometry x="640" y="630" width="270" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ualc1rCMkcrzbtd4liAw-21" value="deferreturn会执行当前函数A注册的defer函数。这是通过保存在defer中的栈指针来判断的" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CCCCFF;" vertex="1" parent="1">
+          <mxGeometry x="640" y="820" width="270" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
